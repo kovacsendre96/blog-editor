@@ -7,12 +7,13 @@ import MakerSelect from "./MakerSelect";
 import ParagraphMaker from "./ParagraphMaker";
 import QuoteMaker from "./QuoteMaker";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import SaveButton from "./SaveButton";
 
 
 const useStyles = makeStyles((theme) => ({
 
 }));
-const MakerCard = ({ rowData, setRowData, }) => {
+const MakerCard = ({ rowData, setRowData, setScrollHelper, scrollHelper }) => {
 
     const classes = useStyles();
     const globalStyle = globalStyles();
@@ -63,7 +64,7 @@ const MakerCard = ({ rowData, setRowData, }) => {
         setRowData({
             ...rowData,
             content: [
-               ...rowData.content, separateSendData()
+                ...rowData.content, separateSendData()
             ]
 
         })
@@ -92,6 +93,8 @@ const MakerCard = ({ rowData, setRowData, }) => {
                 <QuoteMaker
                     textValues={textValues}
                     setTextValues={setTextValues}
+                    scrollHelper={scrollHelper}
+                    setScrollHelper={setScrollHelper}
                 />;
 
         }
@@ -106,13 +109,13 @@ const MakerCard = ({ rowData, setRowData, }) => {
                         typeSelect={typeSelect}
                         setTypeSelect={setTyperSelect}
                         setIsClosedBlock={setIsClosedBlock}
+                        scrollHelper={scrollHelper}
+                        setScrollHelper={setScrollHelper}
                     />
                     {!isClosedBlock &&
-                        < React.Fragment >
-                            < IconButton size="medium" aria-label="upload picture" component="span" onClick={aggreeButtonClickHandler}>
-                                <CheckCircleIcon fontSize="large" className={globalStyle.greenColor} />
-                            </IconButton>
-                        </React.Fragment>
+                        <SaveButton
+                            onClick={aggreeButtonClickHandler}
+                        />
                     }
                 </Grid>
                 {separateOptions()}

@@ -8,17 +8,21 @@ import AddButton from "./Button";
 const useStyles = makeStyles((theme) => ({
 
 }));
-const QuoteMaker = ({textValues,setTextValues}) => {
+const QuoteMaker = ({ textValues, setTextValues, scrollHelper, setScrollHelper }) => {
 
     const classes = useStyles();
     const globalStyle = globalStyles();
     const [quoteRows, setquoteRows] = useState([]);
 
     const textFieldChangeHandler = (e) => {
-        setTextValues([...textValues,e.target.value]);
+        setTextValues([...textValues, e.target.value]);
     };
 
     const newQuoteHandler = () => {
+        console.log(scrollHelper);
+        setScrollHelper((prevState) => ({
+            scrollHelper: !prevState
+        }))
         setquoteRows([...quoteRows,
         <FormControl fullWidth className={globalStyle.marginAll} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-amount">Idézet</InputLabel>

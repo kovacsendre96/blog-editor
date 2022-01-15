@@ -10,6 +10,7 @@ import TitleIcon from '@material-ui/icons/Title';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import HttpIcon from '@material-ui/icons/Http';
 import ImageIcon from '@material-ui/icons/Image';
+import SaveButton from "./components/SaveButton";
 
 const App = () => {
   const globalStyle = globalStyles();
@@ -26,6 +27,13 @@ const App = () => {
   const [blogDate, setBlogDate] = useState(null);
   const [blogUrl, setBlogUrl] = useState(null);
   const [blogImage, setBlogImage] = useState(null);
+
+  const [scrollHelper, setScrollHelper] = useState(true);
+
+  useEffect(() => {
+    window.scrollTo({ top: document.body.scrollHeight, left: 0, behavior: "smooth" });
+    console.log("")
+  }, [row, scrollHelper])
 
 
   const blogTitleChangeHandler = (e) => {
@@ -75,11 +83,12 @@ const App = () => {
 
   const addNewBlockHandler = () => {
 
-
     setRow([...row,
     <MakerCard
       rowData={rowData}
       setRowData={setRowData}
+      scrollHelper={scrollHelper}
+      setScrollHelper={setScrollHelper}
 
     />]);
   };
@@ -87,7 +96,7 @@ const App = () => {
   console.log(rowData);
 
   return (
-    <Grid container justifyContent="center">
+    <Grid container justifyContent="center" style={{ scrollBehavior: 'smooth' }}>
 
       <Grid item xs={8}>
         <Grid container alignItems="center">
@@ -103,11 +112,9 @@ const App = () => {
             />
           </FormControl>
           {!isClosedBlogUrl &&
-            < Grid >
-              < IconButton size="medium" aria-label="upload picture" component="span" onClick={agreeBlogUrlHandler}>
-                <CheckCircleIcon fontSize="large" className={globalStyle.greenColor} />
-              </IconButton>
-            </Grid>
+            <SaveButton
+              onClick={agreeBlogUrlHandler}
+            />
           }
         </Grid>
       </Grid>
@@ -126,11 +133,9 @@ const App = () => {
             />
           </FormControl>
           {!isClosedBlogImg &&
-            < Grid >
-              < IconButton size="medium" aria-label="upload picture" component="span" onClick={agreeBlogImageHandler}>
-                <CheckCircleIcon fontSize="large" className={globalStyle.greenColor} />
-              </IconButton>
-            </Grid>
+            <SaveButton
+              onClick={agreeBlogImageHandler}
+            />
           }
         </Grid>
       </Grid>
@@ -148,11 +153,11 @@ const App = () => {
             />
           </FormControl>
           {!isClosedBlogTitle &&
-            < Grid >
-              < IconButton size="medium" aria-label="upload picture" component="span" onClick={agreeBlogTitleHandler}>
-                <CheckCircleIcon fontSize="large" className={globalStyle.greenColor} />
-              </IconButton>
-            </Grid>
+
+            <SaveButton
+              onClick={agreeBlogTitleHandler}
+            />
+
           }
         </Grid>
       </Grid>
@@ -170,17 +175,18 @@ const App = () => {
             />
           </FormControl>
           {!isClosedBlogDate &&
-            < React.Fragment >
-              < IconButton size="medium" aria-label="upload picture" component="span" onClick={agreeBlogDateHandler}>
-                <CheckCircleIcon fontSize="large" className={globalStyle.greenColor} />
-              </IconButton>
-            </React.Fragment>
+
+            <SaveButton
+              onClick={agreeBlogDateHandler}
+            />
           }
         </Grid>
       </Grid>
       <MakerCard
         rowData={rowData}
         setRowData={setRowData}
+        scrollHelper={scrollHelper}
+        setScrollHelper={setScrollHelper}
 
       />
       {row.map((card => card))}

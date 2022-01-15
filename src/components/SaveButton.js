@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import AddIcon from '@material-ui/icons/Add';
+import SaveIcon from '@material-ui/icons/Save';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -9,21 +9,21 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const AddButton = ({onClick}) => {
+const SaveButton = ({onClick}) => {
     const classes = useStyles();
 
     return (
         <Button
             variant="contained"
-            color="default"
+            color="primary"
             className={classes.button}
-            startIcon={<AddIcon />}
+            startIcon={<SaveIcon />}
             onClick={onClick}
         >
-            Új sor létrehozása
+            Mentés
         </Button>
 
     );
 }
 
-export default AddButton;
+export default SaveButton;

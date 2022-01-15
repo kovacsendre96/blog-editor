@@ -9,11 +9,12 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 120,
     },
 }));
-const MakerSelect = ({ typeSelect, setTypeSelect, setIsClosedBlock }) => {
+const MakerSelect = ({ typeSelect, setTypeSelect, setIsClosedBlock, scrollHelper, setScrollHelper }) => {
 
     const classes = useStyles();
 
     const selectChangeHandler = (e) => {
+        setScrollHelper(!scrollHelper);
         setTypeSelect(e.target.value);
         setIsClosedBlock(false);
     };
