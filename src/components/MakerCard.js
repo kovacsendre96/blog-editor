@@ -21,7 +21,9 @@ const MakerCard = ({ rowData, setRowData, setScrollHelper, scrollHelper }) => {
     const [isClosedBlock, setIsClosedBlock] = useState(true);
 
     /* =========================== Paragraph state =========================== */
-    const [textValue, setTextValue] = useState();
+    const [textValue, setTextValue] = useState(null);
+    const [referenceLink, setReferenceLink] = useState([]);
+    const [linkedText, setLinkedText] = useState([]);
 
     /* =========================== Image states =========================== */
     const [imgSrc, setImgSrc] = useState(null);
@@ -32,13 +34,17 @@ const MakerCard = ({ rowData, setRowData, setScrollHelper, scrollHelper }) => {
     /* =========================== Quote state =========================== */
     const [textValues, setTextValues] = useState([]);
 
+    console.log(linkedText);
+
     const separateSendData = () => {
         let sendData;
         switch (typeSelect) {
             case OPTION_TYPES.PARAGRAPH:
                 sendData = {
                     type: OPTION_TYPES.PARAGRAPH,
-                    content: textValue
+                    content: textValue,
+                    referenceLink: referenceLink,
+                    linkedText: linkedText
                 };
                 break;
             case OPTION_TYPES.IMAGE:
@@ -70,12 +76,20 @@ const MakerCard = ({ rowData, setRowData, setScrollHelper, scrollHelper }) => {
         })
     };
 
-
+console.log(rowData);
     const separateOptions = () => {
         let component;
         switch (typeSelect) {
             case OPTION_TYPES.PARAGRAPH: component =
-                <ParagraphMaker textValue={textValue} setTextValue={setTextValue} />;
+                <ParagraphMaker
+                    textValue={textValue}
+                    setTextValue={setTextValue}
+                    referenceLink={referenceLink}
+                    setReferenceLink={setReferenceLink}
+                    linkedText={linkedText}
+                    setLinkedText={setLinkedText}
+                    setScrollHelper={setScrollHelper}
+                />;
                 break;
             case OPTION_TYPES.IMAGE: component =
                 <ImageMaker
@@ -100,7 +114,7 @@ const MakerCard = ({ rowData, setRowData, setScrollHelper, scrollHelper }) => {
         }
         return component;
     };
-
+   
     return (
         <Grid container justifyContent="center" className={globalStyle.marginAll}>
             <Grid item xs={8} component={Paper}>

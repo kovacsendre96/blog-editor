@@ -19,7 +19,6 @@ const QuoteMaker = ({ textValues, setTextValues, scrollHelper, setScrollHelper }
     };
 
     const newQuoteHandler = () => {
-        console.log(scrollHelper);
         setScrollHelper((prevState) => ({
             scrollHelper: !prevState
         }))
