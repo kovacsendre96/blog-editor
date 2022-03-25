@@ -18,7 +18,7 @@ import axios from 'axios';
     measurementId: "G-H02D51MG6K"
   };
   
-  export const getBlogData = (rowData) => {
+  export const postBlogData = (rowData) => {
     const fetchedResult = [];
      api.post(`/blogs.json`,rowData).then((res) => {
        if(res.statusText == "OK"){

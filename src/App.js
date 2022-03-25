@@ -1,6 +1,6 @@
 import { Button, FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { getBlogData } from "./AxiosHelper";
+import { postBlogData } from "./AxiosHelper";
 import AddButton from "./components/Button";
 import MakerCard from "./components/MakerCard";
 import { globalStyles } from "./globalStyle";
@@ -32,7 +32,6 @@ const App = () => {
 
   useEffect(() => {
     window.scrollTo({ top: document.body.scrollHeight, left: 0, behavior: "smooth" });
-    console.log("")
   }, [row, scrollHelper])
 
 
@@ -76,8 +75,7 @@ const App = () => {
     setIsClosedImg(true);
   };
   const submitHandler = () => {
-
-    getBlogData(rowData);
+    postBlogData(rowData);
   };
 
 

@@ -30,9 +30,10 @@ const ParagraphMaker = ({ textValue, setTextValue, referenceLink, setReferenceLi
     const newReferenceRowHandler = () => {
         setScrollHelper((prevState) => ({
             scrollHelper: !prevState
-        }))
+        }));
+        
         setReferenceRow([...referenceRow,
-        <React.Fragment>
+            <React.Fragment>
             <Grid item xs={10} md={7} lg={5} className={globalStyle.marginAll}>
                 <FormControl fullWidth variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-amount">Linkkel ellátott szó</InputLabel>
@@ -60,6 +61,9 @@ const ParagraphMaker = ({ textValue, setTextValue, referenceLink, setReferenceLi
         </React.Fragment>
         ]);
     };
+
+
+console.log(textValue);
 
     return (
         <Grid>
