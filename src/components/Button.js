@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
@@ -9,18 +9,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const AddButton = ({onClick}) => {
+const AddButton = ({onClick, buttonText, startIcon, size}) => {
     const classes = useStyles();
 
     return (
         <Button
             variant="contained"
-            color="default"
+            color="primary"
             className={classes.button}
-            startIcon={<AddIcon />}
+            startIcon={startIcon ? startIcon : ''}
             onClick={onClick}
+            size={size ? size : 'medium'}
         >
-            Új sor létrehozása
+            {buttonText ? buttonText : ''}
         </Button>
 
     );

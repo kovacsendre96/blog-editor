@@ -10,8 +10,8 @@ const App = () => {
     return (
         <Fragment>
             <Menu/>
-            <Grid container>
-                <Grid item xs={10} style={{ marginTop:'50px',border:'1px solid blue'}}>
+            <Grid container justifyContent={'center'} alignItems={'center'}>
+                <Grid item xs={10} container justifyContent={'space-around'}>
             <Routes>
                 <Route path="/" element={<MainPage/>}/>
                 <Route path="/blog-list" element={<BlogList/>}/>

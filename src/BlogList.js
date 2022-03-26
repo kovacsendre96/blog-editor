@@ -13,10 +13,10 @@ const BlogList = () => {
     }, []);
     const blogListData = blogList.length === 0 ? [] : Object.values(blogList[0].blogs);
     return (
-        <Grid>
+            <React.Fragment>
             {blogListData.length > 1 &&
                 Object.values(blogList[0].blogs).map((blog, index) => (
-                    <Grid item xs={6} md={5} lg={4}>
+                    <Grid item xs={10} md={5}>
                         <BlogCard
                             blogDate={blog.blog_date}
                             blogTitle={blog.blog_title}
@@ -24,7 +24,8 @@ const BlogList = () => {
                         />
                     </Grid>
                 ))}
-        </Grid>
+            </React.Fragment>
+
     );
 };
 

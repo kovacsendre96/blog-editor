@@ -101,8 +101,6 @@ export default function TemporaryDrawer() {
                     {actualMenuItem}
                 </Typography>
             </div>
-
-
         </div>
     );
 }
