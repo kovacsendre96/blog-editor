@@ -11,6 +11,7 @@ import HttpIcon from '@material-ui/icons/Http';
 import ImageIcon from '@material-ui/icons/Image';
 import SaveButton from "./components/SaveButton";
 import {EDIT_TYPE, isDefined} from "./globalHelpers";
+import ViewHeadlineIcon from '@material-ui/icons/ViewHeadline';
 
 const EditorPage = ({editType, blog}) => {
   console.log(blog)
@@ -22,14 +23,14 @@ const EditorPage = ({editType, blog}) => {
     const [isClosedBlogImg, setIsClosedImg] = useState(false);
     const [rowData, setRowData] = useState({content: []});
     const [scrollHelper, setScrollHelper] = useState(true);
-    const rowValue = editMode ? blog.content.map((blogContent, index) =>
+    const rowValue = editMode ? blog.content.map((blogContent) => (
         <MakerCard
         cardMakerType={EDIT_TYPE.EDIT}
         rowData={blogContent}
         setRowData={setRowData}
         scrollHelper={scrollHelper}
         setScrollHelper={setScrollHelper}
-    />) : [];
+    />)) : [];
     const [row, setRow] = useState(rowValue);
 
 
@@ -196,6 +197,8 @@ const EditorPage = ({editType, blog}) => {
             {row.map((card => card))}
             <AddButton
                 onClick={addNewBlockHandler}
+                startIcon={<ViewHeadlineIcon/>}
+                buttonText={"Blokk létrehozása"}
             />
 
             <Button

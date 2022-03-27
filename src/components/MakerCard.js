@@ -1,7 +1,7 @@
-import { Grid, IconButton, makeStyles, Paper } from "@material-ui/core";
-import React, { useState } from "react";
+import {Grid, IconButton, makeStyles, Paper} from "@material-ui/core";
+import React, {useState} from "react";
 import {EDIT_TYPE, isDefined, OPTION_TYPES} from "../globalHelpers";
-import { globalStyles } from "../globalStyle";
+import {globalStyles} from "../globalStyle";
 import ImageMaker from "./ImageMaker";
 import MakerSelect from "./MakerSelect";
 import ParagraphMaker from "./ParagraphMaker";
@@ -11,31 +11,29 @@ import SaveButton from "./SaveButton";
 import {editableInputTypes} from "@testing-library/user-event/dist/utils";
 
 
-const useStyles = makeStyles((theme) => ({
-
-}));
-const MakerCard = ({ rowData, setRowData, setScrollHelper, scrollHelper,cardMakerType }) => {
-    console.log('ROWdaATA',rowData)
+const useStyles = makeStyles((theme) => ({}));
+const MakerCard = ({rowData, setRowData, setScrollHelper, scrollHelper, cardMakerType}) => {
+    console.log('ROWdaATA', rowData)
     const classes = useStyles();
     const isCardEdit = isDefined(cardMakerType) && cardMakerType === EDIT_TYPE.EDIT;
 
     const globalStyle = globalStyles();
-    const [typeSelect, setTyperSelect] = useState(isCardEdit? rowData.type :null);
+    const [typeSelect, setTyperSelect] = useState(isCardEdit ? rowData.type : null);
     const [isClosedBlock, setIsClosedBlock] = useState(true);
 
     /* =========================== Paragraph state =========================== */
-    const [textValue, setTextValue] = useState(isCardEdit? rowData.content :null);
-    const [referenceLink, setReferenceLink] = useState(isCardEdit? rowData.referenceLink :[]);
-    const [linkedText, setLinkedText] = useState(isCardEdit? rowData.linkedText :[]);
+    const [textValue, setTextValue] = useState(isCardEdit ? rowData.content : null);
+    const [referenceLink, setReferenceLink] = useState(isCardEdit ? rowData.referenceLink : []);
+    const [linkedText, setLinkedText] = useState(isCardEdit ? rowData.linkedText : []);
 
     /* =========================== Image states =========================== */
-    const [imgSrc, setImgSrc] = useState(isCardEdit? rowData.src :null);
-    const [position, setPosition] = useState(isCardEdit? rowData.position :null);
-    const [alt, setAlt] = useState(isCardEdit? rowData.alt :null);
-    const [title, setTitle] = useState(isCardEdit? rowData.text :null);
+    const [imgSrc, setImgSrc] = useState(isCardEdit ? rowData.src : null);
+    const [position, setPosition] = useState(isCardEdit ? rowData.position : null);
+    const [alt, setAlt] = useState(isCardEdit ? rowData.alt : null);
+    const [title, setTitle] = useState(isCardEdit ? rowData.text : null);
 
     /* =========================== Quote state =========================== */
-    const [textValues, setTextValues] = useState([]);
+    const [textValues, setTextValues] = useState(isCardEdit ? rowData?.content : []);
 
 
     const separateSendData = () => {
@@ -78,45 +76,49 @@ const MakerCard = ({ rowData, setRowData, setScrollHelper, scrollHelper,cardMake
         })
     };
 
-console.log(rowData);
+    console.log(rowData);
     const separateOptions = () => {
         let component;
         switch (typeSelect) {
-            case OPTION_TYPES.PARAGRAPH: component =
-                <ParagraphMaker
-                    textValue={textValue}
-                    setTextValue={setTextValue}
-                    referenceLink={referenceLink}
-                    setReferenceLink={setReferenceLink}
-                    linkedText={linkedText}
-                    setLinkedText={setLinkedText}
-                    setScrollHelper={setScrollHelper}
-                />;
+            case OPTION_TYPES.PARAGRAPH:
+                component =
+                    <ParagraphMaker
+                        paragraphMakerType={isCardEdit ? EDIT_TYPE.EDIT : EDIT_TYPE.CREATE_NEW}
+                        textValue={textValue}
+                        setTextValue={setTextValue}
+                        referenceLink={referenceLink}
+                        setReferenceLink={setReferenceLink}
+                        linkedText={linkedText}
+                        setLinkedText={setLinkedText}
+                        setScrollHelper={setScrollHelper}
+                    />;
                 break;
-            case OPTION_TYPES.IMAGE: component =
-                <ImageMaker
-                    alt={alt}
-                    setAlt={setAlt}
-                    imgSrc={imgSrc}
-                    setImgSrc={setImgSrc}
-                    position={position}
-                    setPosition={setPosition}
-                    title={title}
-                    setTitle={setTitle}
-                />;
+            case OPTION_TYPES.IMAGE:
+                component =
+                    <ImageMaker
+                        alt={alt}
+                        setAlt={setAlt}
+                        imgSrc={imgSrc}
+                        setImgSrc={setImgSrc}
+                        position={position}
+                        setPosition={setPosition}
+                        title={title}
+                        setTitle={setTitle}
+                    />;
                 break;
-            case OPTION_TYPES.QUOTE: component =
-                <QuoteMaker
-                    textValues={textValues}
-                    setTextValues={setTextValues}
-                    scrollHelper={scrollHelper}
-                    setScrollHelper={setScrollHelper}
-                />;
+            case OPTION_TYPES.QUOTE:
+                component =
+                    <QuoteMaker
+                        textValues={textValues}
+                        setTextValues={setTextValues}
+                        scrollHelper={scrollHelper}
+                        setScrollHelper={setScrollHelper}
+                    />;
 
         }
         return component;
     };
-   
+
     return (
         <Grid container justifyContent="center" className={globalStyle.marginAll}>
             <Grid item xs={8} component={Paper}>
@@ -136,7 +138,7 @@ console.log(rowData);
                 </Grid>
                 {separateOptions()}
             </Grid>
-        </Grid >
+        </Grid>
     );
 };
 
