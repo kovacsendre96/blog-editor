@@ -11,6 +11,8 @@ import Typography from "@material-ui/core/Typography";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import EditIcon from '@material-ui/icons/Edit';
 import Button from "./Button";
+import CheckIcon from '@material-ui/icons/Check';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -19,20 +21,36 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         height: 300,
         width: '100%',
-        margin: 20
+        margin: 20,
+        position: 'relative'
     },
     media: {
-        height: '50%'
+        height: '50%',
+        marginBottom: 15,
     },
     cardTitleWrapper: {
         height: '50%',
-        flexWrap: 'nowrap'
+        flexWrap: 'nowrap',
+    },
+    iconStyle: {
+        marginLeft: '15px',
+        marginTop: '15px'
     }
 }));
 
-const BlogCard = ({imgUrl, blogTitle, blogDate}) => {
+const BlogCard = ({imgUrl, blogTitle, blogDate, blogStatus}) => {
     const classes = useStyles();
-
+    const renderStatusIcon = () => {
+        let icon;
+        switch (blogStatus) {
+            case "active" :
+                icon = <Tooltip  placement="top" title={'Aktív'}><CheckIcon fontSize={"large"} className={classes.iconStyle} style={{color: "#0DCF69"}}/></Tooltip>
+                break;
+            case "inactive":
+                icon = <Tooltip  placement="top" title={'Inaktív'}><HighlightOffIcon fontSize={"large"} className={classes.iconStyle} style={{color: "#CE0E5E"}}/></Tooltip>
+        }
+        return icon;
+    };
     return (
         <Card className={classes.root}>
             <CardMedia
@@ -46,16 +64,25 @@ const BlogCard = ({imgUrl, blogTitle, blogDate}) => {
                 direction={'column'}
                 justifyContent={'space-between'}
             >
-                <Tooltip title={blogTitle}  placement="top">
-                <Typography align={'center'}
-                            variant={"h5"}
-                            noWrap
-                >
-                    {blogTitle}
-                </Typography>
+                <Grid container justifyContent={'center'} alignItems={'center'} style={{
+                    width: '70px',
+                    height: '70px',
+                    background: 'white',
+                    position: 'absolute',
+                    top: '-25px',
+                    left: '-25px',
+                    borderRadius: '50%'
+                }}>{renderStatusIcon()}</Grid>
+                <Tooltip title={blogTitle} placement="top">
+                    <Typography align={'center'}
+                                variant={"h5"}
+                                noWrap
+                    >
+                        {blogTitle}
+                    </Typography>
                 </Tooltip>
+
                 <Typography
-                    gutterBottom
                     align={'center'}
                     color={'textSecondary'}
                     component={"p"}
@@ -64,14 +91,14 @@ const BlogCard = ({imgUrl, blogTitle, blogDate}) => {
                 </Typography>
                 <Grid container justifyContent={'space-around'}>
                     <Button
-                    startIcon={<VisibilityIcon/>}
-                    buttonText={'Előnézet'}
-                    size={'small'}
+                        startIcon={<VisibilityIcon/>}
+                        buttonText={'Előnézet'}
+                        size={'small'}
                     />
                     <Button
-                    startIcon={<EditIcon/>}
-                    buttonText={'Szerkesztés'}
-                    size={'small'}
+                        startIcon={<EditIcon/>}
+                        buttonText={'Szerkesztés'}
+                        size={'small'}
                     />
                 </Grid>
             </Grid>
