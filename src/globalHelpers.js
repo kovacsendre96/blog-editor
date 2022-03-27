@@ -79,3 +79,16 @@ export const setLinkFromText = (referenceLinks, linkedText, text) => {
     }
     return text;
 };
+
+export function isExist(x) {
+    return typeof (x) !== 'undefined';
+};
+
+export function isDefined(x) {
+    return Boolean(isExist(x) && (x !== null));
+};
+
+export const EDIT_TYPE = {
+    EDIT: "edit",
+    CREATE_NEW: "create",
+};

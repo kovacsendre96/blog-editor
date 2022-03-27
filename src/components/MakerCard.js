@@ -1,6 +1,6 @@
 import { Grid, IconButton, makeStyles, Paper } from "@material-ui/core";
 import React, { useState } from "react";
-import { OPTION_TYPES } from "../globalHelpers";
+import {EDIT_TYPE, isDefined, OPTION_TYPES} from "../globalHelpers";
 import { globalStyles } from "../globalStyle";
 import ImageMaker from "./ImageMaker";
 import MakerSelect from "./MakerSelect";
@@ -8,33 +8,35 @@ import ParagraphMaker from "./ParagraphMaker";
 import QuoteMaker from "./QuoteMaker";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import SaveButton from "./SaveButton";
+import {editableInputTypes} from "@testing-library/user-event/dist/utils";
 
 
 const useStyles = makeStyles((theme) => ({
 
 }));
-const MakerCard = ({ rowData, setRowData, setScrollHelper, scrollHelper }) => {
-
+const MakerCard = ({ rowData, setRowData, setScrollHelper, scrollHelper,cardMakerType }) => {
+    console.log('ROWdaATA',rowData)
     const classes = useStyles();
+    const isCardEdit = isDefined(cardMakerType) && cardMakerType === EDIT_TYPE.EDIT;
+
     const globalStyle = globalStyles();
-    const [typeSelect, setTyperSelect] = useState();
+    const [typeSelect, setTyperSelect] = useState(isCardEdit? rowData.type :null);
     const [isClosedBlock, setIsClosedBlock] = useState(true);
 
     /* =========================== Paragraph state =========================== */
-    const [textValue, setTextValue] = useState(null);
-    const [referenceLink, setReferenceLink] = useState([]);
-    const [linkedText, setLinkedText] = useState([]);
+    const [textValue, setTextValue] = useState(isCardEdit? rowData.content :null);
+    const [referenceLink, setReferenceLink] = useState(isCardEdit? rowData.referenceLink :[]);
+    const [linkedText, setLinkedText] = useState(isCardEdit? rowData.linkedText :[]);
 
     /* =========================== Image states =========================== */
-    const [imgSrc, setImgSrc] = useState(null);
-    const [position, setPosition] = useState(null);
-    const [alt, setAlt] = useState(null);
-    const [title, setTitle] = useState(null);
+    const [imgSrc, setImgSrc] = useState(isCardEdit? rowData.src :null);
+    const [position, setPosition] = useState(isCardEdit? rowData.position :null);
+    const [alt, setAlt] = useState(isCardEdit? rowData.alt :null);
+    const [title, setTitle] = useState(isCardEdit? rowData.text :null);
 
     /* =========================== Quote state =========================== */
     const [textValues, setTextValues] = useState([]);
 
-    console.log(linkedText);
 
     const separateSendData = () => {
         let sendData;

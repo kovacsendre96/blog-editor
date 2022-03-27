@@ -65,7 +65,7 @@ const BlogCard = ({imgUrl, blogTitle, blogDate, blogStatus, blogUrl}) => {
             <CardMedia
                 className={classes.media}
                 image={imgUrl}
-                title="Paella dish"
+                title={blogTitle}
             />
             <Grid
                 className={classes.cardTitleWrapper}

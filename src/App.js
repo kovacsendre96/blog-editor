@@ -7,6 +7,7 @@ import {Route, Routes} from 'react-router-dom';
 import MainPage from "./MainPage";
 import PreviewMode from "./PreviewMode/PreviewMode";
 import {getBlogData} from "./AxiosHelper";
+import {EDIT_TYPE} from "./globalHelpers";
 
 const App = () => {
 
@@ -34,7 +35,7 @@ const App = () => {
                         }
                         <Route
                             path="/new-blog"
-                            element={<EditorPage/>}
+                            element={<EditorPage editType={EDIT_TYPE.CREATE_NEW}/>}
                         />
                         {
                             blogListData.length > 0 &&
@@ -47,7 +48,7 @@ const App = () => {
                                         />
                                         <Route
                                             path={`blog-list/blog-edit/${blog.blog_url}`}
-                                            element={<EditorPage blog={blog}/>}
+                                            element={<EditorPage editType={EDIT_TYPE.EDIT} blog={blog}/>}
                                         />
                                     </React.Fragment>
                                 )
