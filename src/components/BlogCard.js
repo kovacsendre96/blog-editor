@@ -13,6 +13,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import Button from "./Button";
 import CheckIcon from '@material-ui/icons/Check';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import {useNavigate} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,18 +39,26 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const BlogCard = ({imgUrl, blogTitle, blogDate, blogStatus}) => {
+const BlogCard = ({imgUrl, blogTitle, blogDate, blogStatus, blogUrl}) => {
     const classes = useStyles();
+    const navigate = useNavigate();
     const renderStatusIcon = () => {
         let icon;
         switch (blogStatus) {
             case "active" :
-                icon = <Tooltip  placement="top" title={'Aktív'}><CheckIcon fontSize={"large"} className={classes.iconStyle} style={{color: "#0DCF69"}}/></Tooltip>
+                icon = <Tooltip placement="top" title={'Aktív'}><CheckIcon fontSize={"large"} className={classes.iconStyle} style={{color: "#0DCF69"}}/></Tooltip>
                 break;
             case "inactive":
                 icon = <Tooltip  placement="top" title={'Inaktív'}><HighlightOffIcon fontSize={"large"} className={classes.iconStyle} style={{color: "#CE0E5E"}}/></Tooltip>
         }
         return icon;
+    };
+
+    const handlePreviewButtonClick = () => {
+        navigate(`blog-preview/${blogUrl}`);
+    };
+    const handleEditButtonClick = () => {
+        navigate(`blog-edit/${blogUrl}`);
     };
     return (
         <Card className={classes.root}>
@@ -72,7 +81,9 @@ const BlogCard = ({imgUrl, blogTitle, blogDate, blogStatus}) => {
                     top: '-25px',
                     left: '-25px',
                     borderRadius: '50%'
-                }}>{renderStatusIcon()}</Grid>
+                }}>
+                    {renderStatusIcon()}
+                </Grid>
                 <Tooltip title={blogTitle} placement="top">
                     <Typography align={'center'}
                                 variant={"h5"}
@@ -94,11 +105,13 @@ const BlogCard = ({imgUrl, blogTitle, blogDate, blogStatus}) => {
                         startIcon={<VisibilityIcon/>}
                         buttonText={'Előnézet'}
                         size={'small'}
+                        onClick={handlePreviewButtonClick}
                     />
                     <Button
                         startIcon={<EditIcon/>}
                         buttonText={'Szerkesztés'}
                         size={'small'}
+                        onClick={handleEditButtonClick}
                     />
                 </Grid>
             </Grid>

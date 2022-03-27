@@ -4,13 +4,8 @@ import {getBlogData} from "./AxiosHelper";
 import BlogCard from "./components/BlogCard";
 import React, {useEffect, useState} from "react";
 
-const BlogList = () => {
-    const [blogList, setBlogList] = useState([]);
-    const [loading, setLoading] = useState(false);
+const BlogList = ({blogList}) => {
 
-    useEffect(() => {
-        getBlogData(setBlogList, setLoading, '');
-    }, []);
     const blogListData = blogList.length === 0 ? [] : Object.values(blogList[0].blogs);
     return (
             <React.Fragment>
@@ -22,6 +17,7 @@ const BlogList = () => {
                             blogTitle={blog.blog_title}
                             imgUrl={blog.blog_img}
                             blogStatus={blog.blog_status}
+                            blogUrl={blog.blog_url}
                         />
                     </Grid>
                 ))}
