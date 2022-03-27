@@ -6,7 +6,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import {Grid} from '@material-ui/core';
+import {Grid, Tooltip} from '@material-ui/core';
 import Typography from "@material-ui/core/Typography";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import EditIcon from '@material-ui/icons/Edit';
@@ -25,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
         height: '50%'
     },
     cardTitleWrapper: {
-        height: '50%'
+        height: '50%',
+        flexWrap: 'nowrap'
     }
 }));
 
@@ -45,11 +46,14 @@ const BlogCard = ({imgUrl, blogTitle, blogDate}) => {
                 direction={'column'}
                 justifyContent={'space-between'}
             >
+                <Tooltip title={blogTitle}  placement="top">
                 <Typography align={'center'}
                             variant={"h5"}
+                            noWrap
                 >
                     {blogTitle}
                 </Typography>
+                </Tooltip>
                 <Typography
                     gutterBottom
                     align={'center'}
