@@ -10,7 +10,7 @@ import HtmlTooltip from "../components/HtmlTooltip";
 
 
 
-const PostDetailsPanel = ({index, postDetailValue, postDetailChangeHandler, inputName, inputIcon}) => {
+const PostDetailsPanel = ({index, postDetailValue, postDetailChangeHandler, inputName, inputIcon,helperSrc}) => {
     return (
         <FormControl key={`form-control-index`} fullWidth variant="outlined">
             <InputLabel htmlFor={`outlined-${index}`}>{inputName}</InputLabel>
@@ -25,7 +25,7 @@ const PostDetailsPanel = ({index, postDetailValue, postDetailChangeHandler, inpu
                 <InputAdornment position="end">
                     <HtmlTooltip
                         children={<InfoIcon color={'action'}/>}
-                        // titleHtml={<img src={}/>}
+                        titleHtml={<img style={{width:150}} alt={inputName} src={helperSrc}/>}
                     />
                 </InputAdornment>
             }

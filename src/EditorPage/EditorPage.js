@@ -121,6 +121,7 @@ const EditorPage = ({editType, blog}) => {
                     postDetailValue={postDetail.postDetailValue}
                     inputName={postDetail.inputName}
                     inputIcon={postDetail.inputIcon}
+                    helperSrc={postDetail.helperSrc}
                 />
             </Grid>
         ))
