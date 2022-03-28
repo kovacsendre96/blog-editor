@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import EditorPage from "./EditorPage";
+import EditorPage from "./EditorPage/EditorPage";
 import BlogList from "./BlogList";
 import {Grid} from "@material-ui/core";
 import Menu from './Menu';
@@ -26,7 +26,7 @@ const App = () => {
             <Grid container justifyContent={'center'} alignItems={'center'}>
                 <Grid item xs={10} container justifyContent={'space-around'}>
                     <Routes>
-                        <Route path="/" element={<MainPage/>}/>
+                        <Route key={'blog-list'} path="/" element={<MainPage/>}/>
                         {blogListData.length > 0 &&
                             <Route
                                 path="/blog-list"
@@ -34,6 +34,7 @@ const App = () => {
                             />
                         }
                         <Route
+                            key={'blog-editor-page'}
                             path="/new-blog"
                             element={<EditorPage editType={EDIT_TYPE.CREATE_NEW}/>}
                         />
@@ -43,10 +44,12 @@ const App = () => {
                                 return (
                                     <React.Fragment>
                                         <Route
+                                            key={`route-blog-preview-${index}`}
                                             path={`blog-list/blog-preview/${blog.blog_url}`}
                                             element={<PreviewMode blog={blog}/>}
                                         />
                                         <Route
+                                            key={`route-blog-edit-${index}`}
                                             path={`blog-list/blog-edit/${blog.blog_url}`}
                                             element={<EditorPage editType={EDIT_TYPE.EDIT} blog={blog}/>}
                                         />
